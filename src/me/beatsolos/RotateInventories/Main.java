@@ -21,32 +21,36 @@ public class Main extends JavaPlugin {
             @Override
             public void run() {
 
-                ArrayList<Player> players = new ArrayList<Player>();
+                if(Bukkit.getOnlinePlayers().size() > 1) {
+                    ArrayList<Player> players = new ArrayList<Player>();
+                    for (Player p : Bukkit.getOnlinePlayers())
+                        players.add(p);
 
-                for(Player p : Bukkit.getOnlinePlayers())
-                    players.add(p);
+                    ItemStack[] p0inv = players.get(0).getInventory().getContents();
+                    ItemStack[] p0armor = players.get(0).getInventory().getArmorContents();
+                    ItemStack p0offhand = players.get(0).getInventory().getItemInOffHand();
 
-                for(int i = 0; i < players.size()-1; i++) {
+                    for (int i = 0; i < players.size(); i++) {
 
-                    if(i == players.size()-1) {
-                        // contents
-                        players.get(i).getInventory().setContents(players.get(0).getInventory().getContents());
-                        // armor contents
-                        players.get(i).getInventory().setArmorContents(players.get(0).getInventory().getArmorContents());
-                        // off hand
-                        players.get(i).getInventory().setItemInOffHand(players.get(0).getInventory().getItemInOffHand());
-                    } else {
-                        // contents
-                        players.get(i).getInventory().setContents(players.get(i + 1).getInventory().getContents());
-                        // armor contents
-                        players.get(i).getInventory().setArmorContents(players.get(i + 1).getInventory().getArmorContents());
-                        // off hand
-                        players.get(i).getInventory().setItemInOffHand(players.get(i + 1).getInventory().getItemInOffHand());
+                        if (i == players.size() - 1) {
+                            // contents
+                            players.get(i).getInventory().setContents(p0inv);
+                            // armor contents
+                            players.get(i).getInventory().setArmorContents(p0armor);
+                            // off hand
+                            players.get(i).getInventory().setItemInOffHand(p0offhand);
+                        } else {
+                            // contents
+                            players.get(i).getInventory().setContents(players.get(i + 1).getInventory().getContents());
+                            // armor contents
+                            players.get(i).getInventory().setArmorContents(players.get(i + 1).getInventory().getArmorContents());
+                            // off hand
+                            players.get(i).getInventory().setItemInOffHand(players.get(i + 1).getInventory().getItemInOffHand());
+                        }
                     }
                 }
-
             }
-        }.runTaskTimer(plugin, 0, 100);
+        }.runTaskTimer(plugin, 0, 400);
     }
     public void onDisable() {
         // nothing
