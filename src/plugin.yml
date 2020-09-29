@@ -1,0 +1,5 @@
+main: me.beatsolos.RotateInventories.Main
+name: RotateInventories
+version: 1.0
+author: Jojo
+api-version: 1.13
