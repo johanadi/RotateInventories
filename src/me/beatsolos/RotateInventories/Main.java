@@ -50,7 +50,7 @@ public class Main extends JavaPlugin {
                     }
                 }
             }
-        }.runTaskTimer(plugin, 0, 400);
+        }.runTaskTimer(plugin, 0, 20*100);
     }
     public void onDisable() {
         // nothing
